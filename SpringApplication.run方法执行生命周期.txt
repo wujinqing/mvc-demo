@@ -1,0 +1,45 @@
+
+实例化SpringApplication：
+
+public SpringApplication(ResourceLoader resourceLoader, Class<?>... primarySources) {
+		this.resourceLoader = resourceLoader;
+		Assert.notNull(primarySources, "PrimarySources must not be null");
+		this.primarySources = new LinkedHashSet<>(Arrays.asList(primarySources));
+		this.webApplicationType = WebApplicationType.deduceFromClasspath();
+设置初始化器
+		setInitializers((Collection) getSpringFactoriesInstances(
+				ApplicationContextInitializer.class));
+设置事件监听器
+		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
+		this.mainApplicationClass = deduceMainApplicationClass();
+	}
+
+
+SpringApplication.run方法执行生命周期
+
+1.首先调用listeners.starting();发布ApplicationStartingEvent事件。
+2.然后创建Environment，并配置Environment，执行configurePropertySources和configureProfiles方法，然后执行listeners.environmentPrepared(environment);发布ApplicationEnvironmentPreparedEvent事件。
+3.将SpringApplication实例绑定到Environment的spring.main属性上。
+4.创建ApplicationContext实例。
+4.1public AnnotationConfigServletWebServerApplicationContext() {
+		this.reader = new AnnotatedBeanDefinitionReader(this);
+		this.scanner = new ClassPathBeanDefinitionScanner(this);
+	}
+4.2在AnnotatedBeanDefinitionReader的构造方法中会通过AnnotationConfigUtils#registerAnnotationConfigProcessors方法注册各种基于注解的BeanFactoryPostProcessor如(ConfigurationClassPostProcessor,AutowiredAnnotationBeanPostProcessor, CommonAnnotationBeanPostProcessor,EventListenerMethodProcessor)。
+
+
+5.将Environment绑定到ApplicationContext，通过context.setEnvironment(environment);实现。
+6.执行ApplicationContextInitializer初始化器。
+7.通过listeners.contextPrepared(context);发布ApplicationContextInitializedEvent事件。
+8.通过BeanDefinitionLoader加载资源。
+9.通过listeners.contextLoaded(context);方法完成两件事：
+	1.将ApplicationListener添加到ApplicationContext，context.addApplicationListener(listener);，如果监		  听器是ApplicationContextAware还会执行listener.setApplicationContext(context);方法。
+	2.发布ApplicationPreparedEvent事件。
+
+10.调用refreshContext(context);刷新ApplicationContext上下文（内部干了很多很多事）。
+11.执行afterRefresh(context, applicationArguments);默认实现为空啥也没做。
+12.通过listeners.started(context);发布ApplicationStartedEvent事件。
+13.执行ApplicationRunner和CommandLineRunner。
+14.通过listeners.running(context);发布ApplicationReadyEvent事件。
+15.如果启动过程中发生错误，通过listeners.failed(context, exception);发布ApplicationFailedEvent事件。
+

@@ -1,0 +1,17 @@
+RestTemplate执行流程：
+
+1.org.springframework.web.client.RestTemplate#postForEntity
+2.org.springframework.web.client.RestTemplate#execute
+3.org.springframework.web.client.RestTemplate#doExecute
+4.org.springframework.http.client.AbstractClientHttpRequest#execute
+5.org.springframework.http.client.AbstractBufferingClientHttpRequest#executeInternal
+6.org.springframework.http.client.InterceptingClientHttpRequest#executeInternal
+7.org.springframework.http.client.InterceptingClientHttpRequest.InterceptingRequestExecution#execute -> 递归调用拦截器，创建新的Request发送网络请求
+8.org.springframework.http.client.AbstractClientHttpRequest#execute
+9.org.springframework.http.client.AbstractBufferingClientHttpRequest#executeInternal
+10.org.springframework.http.client.SimpleBufferingClientHttpRequest#executeInternal -> 真正的发送网络请求FileCopyUtils.copy(bufferedOutput, this.connection.getOutputStream());
+
+
+
+
+

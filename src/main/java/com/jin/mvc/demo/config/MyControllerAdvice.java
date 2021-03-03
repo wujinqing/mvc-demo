@@ -22,6 +22,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public User customException(Exception e) {
+        e.printStackTrace();
         User user = new User();
 
         user.setId(1);

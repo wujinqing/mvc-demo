@@ -1,0 +1,100 @@
+AbstractApplicationContext#refresh
+
+1.prepareRefresh();
+
+1.1 this.scanner.clearCache();清空扫描缓存(metadataReaderCache)底层是一个LinkedHashMap. Map<Resource, MetadataReader> metadataReaderCache;
+
+1.2 执行AbstractApplicationContext的prepareRefresh方法，
+1.2.1 将上下文是否关闭的标志设置为false。
+1.2.2 将上下文是否激活的标志设置为true。
+1.2.3 执行initPropertySources()方法; 如果是web环境的话，将原来的封装servletContextInitParams的StubPropertySource替换为ServletContextPropertySource，将原来的封装servletConfigInitParams的StubPropertySource替换为ServletConfigPropertySource，。
+1.2.4 将applicationListeners赋给earlyApplicationListeners。
+
+
+1.3 执行obtainFreshBeanFactory();方法获取bean工厂。
+1.3.1 执行refreshBeanFactory();将refreshed标志设置为true。
+1.3.2 获取bean工厂DefaultListableBeanFactory。
+
+
+1.4 执行prepareBeanFactory(beanFactory);方法，设置一些标准的上下文特性，如：beanClassLoader，post-processors。
+1.4.1 设置beanClassLoader。
+1.4.2 设置beanExpressionResolver = StandardBeanExpressionResolver。
+1.4.3 设置propertyEditorRegistrars添加一个ResourceEditorRegistrar。
+1.4.4 创建一个ApplicationContextAwareProcessor添加到beanPostProcessors。
+1.4.5 设置指定接口不需要autowiring，主要是各种Aware接口。
+1.4.6 设置resolvableDependencies
+
+beanFactory.registerResolvableDependency(BeanFactory.class, beanFactory);
+		beanFactory.registerResolvableDependency(ResourceLoader.class, this);
+		beanFactory.registerResolvableDependency(ApplicationEventPublisher.class, this);
+		beanFactory.registerResolvableDependency(ApplicationContext.class, this);
+1.4.7 创建一个ApplicationListenerDetector添加到beanPostProcessors。
+
+1.4.8 注册environment，systemProperties，systemEnvironment的实例到beanFactory。
+
+1.5 执行postProcessBeanFactory(beanFactory);方法。
+1.5.1 创建一个WebApplicationContextServletContextAwareProcessor添加到beanPostProcessors。注册registerWebApplicationScopes。
+Map<String, Scope> scopes = new LinkedHashMap<>(8);
+
+
+beanFactory.registerResolvableDependency(ServletRequest.class, new RequestObjectFactory());
+		beanFactory.registerResolvableDependency(ServletResponse.class, new ResponseObjectFactory());
+		beanFactory.registerResolvableDependency(HttpSession.class, new SessionObjectFactory());
+		beanFactory.registerResolvableDependency(WebRequest.class, new WebRequestObjectFactory());
+
+
+
+1.6 执行invokeBeanFactoryPostProcessors(beanFactory);方法。
+1.6.1 调用所有的BeanFactoryPostProcessor。
+
+
+
+
+
+在new StandardServletEnvironment();实例化的时候默认会添加以下四个属性源：
+1.servletConfigInitParams。
+2.servletContextInitParams。
+3.systemProperties。
+4.systemEnvironment。
+
+
+propertySources：
+org.springframework.web.context.support.StandardServletEnvironment#customizePropertySources
+protected void customizePropertySources(MutablePropertySources propertySources) {
+
+		propertySources.addLast(new StubPropertySource(SERVLET_CONFIG_PROPERTY_SOURCE_NAME));
+		propertySources.addLast(new StubPropertySource(SERVLET_CONTEXT_PROPERTY_SOURCE_NAME));
+		if (JndiLocatorDelegate.isDefaultJndiEnvironmentAvailable()) {
+			propertySources.addLast(new JndiPropertySource(JNDI_PROPERTY_SOURCE_NAME));
+		}
+		super.customizePropertySources(propertySources);
+	}
+org.springframework.core.env.StandardEnvironment#customizePropertySources
+protected void customizePropertySources(MutablePropertySources propertySources) {
+		propertySources.addLast(new MapPropertySource(SYSTEM_PROPERTIES_PROPERTY_SOURCE_NAME, getSystemProperties()));
+		propertySources.addLast(new SystemEnvironmentPropertySource(SYSTEM_ENVIRONMENT_PROPERTY_SOURCE_NAME, getSystemEnvironment()));
+	}
+
+
+ConfigFileApplicationListener接收到listeners.environmentPrepared(environment);发布的事件后会添加RandomValuePropertySource属性源。
+
+
+org.springframework.boot.context.config.ConfigFileApplicationListener#addPropertySources
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
