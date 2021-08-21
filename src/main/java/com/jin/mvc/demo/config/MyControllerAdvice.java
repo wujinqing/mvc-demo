@@ -61,4 +61,5 @@ public class MyControllerAdvice {
     public void initBinder2(WebDataBinder binder) {
         binder.setFieldDefaultPrefix("b.");
     }
+
 }

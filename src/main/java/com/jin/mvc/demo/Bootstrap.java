@@ -23,6 +23,12 @@ public class Bootstrap {
     @Value("${uer.name}")
     private String name;
     public static void main(String[] args) {
+
+//        SpringApplication springApplication = new SpringApplication(Bootstrap.class);
+//
+//
+//        springApplication.run(args);
+
         SpringApplication.run(Bootstrap.class, args);
     }
 

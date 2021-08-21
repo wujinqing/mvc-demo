@@ -1,7 +1,15 @@
 package com.jin.mvc.demo.controller;
 
 import com.jin.mvc.demo.User;
+import com.jin.mvc.demo.service.MyService;
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +23,22 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @date 2020年10月23日
  */
 @Controller
-public class MyController implements InitializingBean {
+public class MyController implements InitializingBean, EnvironmentAware, ApplicationContextAware {
+    @Autowired
+    private MyService myService;
+    @Value("${uer.name}")
+    private String name;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        System.out.println("setApplicationContext");
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        System.out.println("environment");
+    }
+
     @RequestMapping("/getUser2")
     public String getUser(Model model, @RequestParam("id") int id)
     {

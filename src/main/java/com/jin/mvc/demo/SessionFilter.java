@@ -19,6 +19,7 @@ public class SessionFilter implements Filter {
 
         // 获取或者创建session
         HttpSession session = httpRequest.getSession();
+
         // 设置session失效时间，单位秒
 //        session.setMaxInactiveInterval(3);
         chain.doFilter(request, response);

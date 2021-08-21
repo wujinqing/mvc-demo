@@ -51,11 +51,11 @@ public class Sha1Test {
 
         System.out.println("===================");
 
-        MessageDigest messageDigest5 = MessageDigest.getInstance("SHA-512/256");
-
-        byte[] bytes5 = messageDigest5.digest("hello".getBytes("UTF-8"));
-
-        System.out.println(Hex.encodeHexString(bytes5));
+//        MessageDigest messageDigest5 = MessageDigest.getInstance("SHA-512/256");
+//
+//        byte[] bytes5 = messageDigest5.digest("hello".getBytes("UTF-8"));
+//
+//        System.out.println(Hex.encodeHexString(bytes5));
 
     }
 }

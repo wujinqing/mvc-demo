@@ -1,0 +1,10 @@
+    /**
+     * 最上面的标题：选择航班或者上海
+     *
+     */
+    private String title;
+
+    /**
+     * 最上面的标题：北京
+     */
+    private String subTitle;

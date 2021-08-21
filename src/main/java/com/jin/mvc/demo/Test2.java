@@ -31,6 +31,7 @@ public class Test2 {
             graphics2D.drawImage(mergeImage, 0, 0, mergeImage.getWidth(), mergeImage.getHeight(), null);
             graphics2D.drawString("aaa", 0 , 0);
 
+
             graphics2D.dispose();
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
