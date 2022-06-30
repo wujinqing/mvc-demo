@@ -1,4 +1,3 @@
-resultCode	String		状态码
-resultMsg	String	状态描述信息
-mealType	String	配餐类型:早餐B，正餐D，点心S
-mealCabinMap	Map<String, String>	各舱等餐食的map数据格式如： key为舱等，value为餐食类型{ "Y": "Y通用干点","W": "W通用干点"}
+ffpNo	是	String	会员卡号
+toTier	是	String	目标等级
+date	否	String	查询日期 默认当前日期，格式：yyyy-MM-dd

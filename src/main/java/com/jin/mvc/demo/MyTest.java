@@ -15,7 +15,7 @@ public class MyTest {
     private String eventId = "xxxid";
     private String statusKey = "status_var";
     private String messageKey;
-    private String pagelocationKep = "pagelocation";
+    private String pagelocationKep = "";
 
     private Map<String, String> map; // pagelocation: url, status_var: "xx", xxxid： "",
 

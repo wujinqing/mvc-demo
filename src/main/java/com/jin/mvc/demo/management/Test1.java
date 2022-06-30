@@ -1,6 +1,8 @@
 package com.jin.mvc.demo.management;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.lang.management.*;
 import java.util.List;
@@ -201,7 +203,7 @@ public class HeapMain {
 
  */
 public class Test1 {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         //内存使用情况(堆/非堆)
         MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
         //线程使用情况
@@ -224,11 +226,14 @@ public class Test1 {
 //        System.out.println("threadMXBean" + JSON.toJSONString(threadMXBean));
 //        System.out.println("runtimeMXBean" + JSON.toJSONString(runtimeMXBean));
 
-        // 会报错
-//        for (MemoryPoolMXBean memoryPoolMXBean : memoryPoolMXBeanList) {
-//            System.out.println("memoryPoolMXBean" + JSON.toJSONString(memoryPoolMXBean));
-//        }
+        ObjectMapper objectMapper = new ObjectMapper();
 
-        System.out.println("runtimeMXBean" + JSON.toJSONString(cl));
+        // 会报错
+        for (MemoryPoolMXBean memoryPoolMXBean : memoryPoolMXBeanList) {
+            System.out.println(memoryPoolMXBean);
+//            System.out.println("memoryPoolMXBean" + objectMapper.writeValueAsString(memoryPoolMXBean));
+        }
+
+//        System.out.println("runtimeMXBean" + JSON.toJSONString(cl));
     }
 }

@@ -1,10 +1,19 @@
-    /**
-     * 最上面的标题：选择航班或者上海
-     *
+/**
+     * 花积分 文字：您还可以
      */
-    private String title;
+    private String spendPointText1;
 
     /**
-     * 最上面的标题：北京
+     * 花积分 文字：花积分，升等级（升级后会员有效期1年） 或者  花积分，续等级（续级后会员有效期1年）
      */
-    private String subTitle;
+    private String spendPointText2;
+
+    /**
+     * 花积分 按钮对应的链接  --目前在客户端原生的 不是后台提供的
+     */
+    private String spendPointUrl;
+
+    /**
+     * 花积分 按钮 埋点
+     */
+    private String spendPointGioKey;

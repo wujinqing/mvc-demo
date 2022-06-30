@@ -1,11 +1,14 @@
 package com.jin.mvc.demo;
 
+import com.jin.mvc.demo.config.MyBean;
 import org.jasypt.encryption.pbe.PooledPBEStringEncryptor;
 import org.jasypt.encryption.pbe.config.SimpleStringPBEConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +32,9 @@ public class Bootstrap {
 //
 //        springApplication.run(args);
 
-        SpringApplication.run(Bootstrap.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(Bootstrap.class, args);
+
+        System.out.println(ctx.getBean(MyBean.class).getName());
     }
 
     @RequestMapping("/getUser")

@@ -215,7 +215,7 @@ org.springframework.beans.factory.config.PlaceholderConfigurerSupport.doProcessP
 
 |接口名|方法|声明|
 |---|---|---|
-|InstantiationAwareBeanPostProcessor|postProcessBeforeInstantiation|实例化之前执行, 这一步可以生成代理bean，如：aop|
+|InstantiationAwareBeanPostProcessor|postProcessBeforeInstantiation|实例化之前执行, 这一步可以生成代理bean|
 |BeanPostProcessor|postProcessAfterInitialization|如果上一步返回了代理bean，这执行这个操作，执行完直接返回不会执行后续操作|
 |InstantiationAwareBeanPostProcessor|postProcessAfterInstantiation|实例化之后执行|
 |执行autowire|||

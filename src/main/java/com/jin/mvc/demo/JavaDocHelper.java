@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class JavaDocHelper {
-
 	public static void main(String[] args)throws Exception {
 		genRes();
 //		genReq();
@@ -27,7 +26,8 @@ public class JavaDocHelper {
         
     }
 	public static void genReq() throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(JavaDocHelper.class.getClassLoader().getResourceAsStream("fields.txt")));
+		BufferedReader br = new BufferedReader(new InputStreamReader(JavaDocHelper.class.getClassLoader()
+                .getResourceAsStream("fields.txt")));
 	
 	
 		String buf = "";

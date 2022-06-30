@@ -11,7 +11,7 @@ import java.io.IOException;
  * @author wu.jinqing
  * @date 2020年10月29日
  */
-@WebFilter("/*")
+@WebFilter(value = "/*", asyncSupported = true)
 public class MyFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

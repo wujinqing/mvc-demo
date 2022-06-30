@@ -1,4 +1,4 @@
-# ConfigFileApplicationListener读取自定义配置applicatiom.properties
+# ConfigFileApplicationListener读取自定义配置application.properties
 
 ## 1.收到ApplicationEnvironmentPreparedEvent事件。
 

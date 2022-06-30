@@ -2,7 +2,7 @@
 
 > 1.执行SpringApplication.run()方法，在prepareEnvironment()方法中创建Environment，发布ApplicationEnvironmentPreparedEvent事件。
 
-> 2.事件监听器类LoggingApplicationListener接收到ApplicationEnvironmentPreparedEvent事件，执行initialize方法初始化Logback。
+> 2.事件监听器类LoggingApplicationListener(他的顺序是Ordered.HIGHEST_PRECEDENCE + 20，ConfigFileApplicationListener的顺序是Ordered.HIGHEST_PRECEDENCE + 10)接收到ApplicationEnvironmentPreparedEvent事件，执行initialize方法初始化Logback。
 
 > 3.执行LogbackLoggingSystem.initialize()方法。
 

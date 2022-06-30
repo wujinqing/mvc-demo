@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @date 2020年10月23日
  */
 @Controller
+@Service
 public class MyController implements InitializingBean, EnvironmentAware, ApplicationContextAware {
     @Autowired
     private MyService myService;

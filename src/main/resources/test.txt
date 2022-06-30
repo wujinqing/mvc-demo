@@ -1,0 +1,13 @@
+flightId	String	航段id	取shopping接口返回的flightInfoId	N
+seatXYZ	String	座位号	座位图查询接口返回	N
+seatValue	String	价格等级	座位图查询接口返回 ，收费座位必填	Y
+fcny	BigDecimal	票面价格	座位图查询接口返回	N
+scny	BigDecimal	实付金额	座位图查询接口返回	N
+currency	String	币种	座位图查询接口返回	N
+pointAmount	BigDecimal	积分金额	座位图查询接口返回	N
+point	String	是否积分选座	积分：JF，现金：JG	N
+chargeSeat	String	是否收费座位	座位状态是U传Y，否则传N	N
+characteristic	String	座位属性	W: 靠窗，A: 靠走道，E: 靠安全出口，G: 前排。多个属性“,”分割	N
+resourceId	String	资源id	座位图查询接口返回	N
+cuss	Boolean	是否自助值机		N
+originalPointAmount	BigDecimal	原始积分		N

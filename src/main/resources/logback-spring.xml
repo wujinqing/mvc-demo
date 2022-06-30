@@ -7,7 +7,7 @@
 
 
     <property name="LOG_HOME" value="/app/msa/logs"/>
-    <property name="LOG_PATTERN" value=" [%thread] [%-5level] [%date{yyyy-MM-dd HH:mm:ss.SSS}] %logger{96} [%line] - %msg%n"/>
+    <property name="LOG_PATTERN" value="spring [%thread] [%-5level] [%date{yyyy-MM-dd HH:mm:ss.SSS}] %logger{96} [%line] - %msg%n"/>
 
 	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder>
